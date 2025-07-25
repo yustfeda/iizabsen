@@ -116,7 +116,7 @@ export function createPageLayout(currentPage) {
     let layoutHtml = `
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <img src="https://placehold.co/60x60/007BFF/FFFFFF?text=ABS" alt="Logo Absensi"> <!-- Logo placeholder disesuaikan dengan tema biru -->
+                <img src="lebak.png" alt="Logo Absensi"> <!-- Logo placeholder disesuaikan dengan tema biru -->
                 <h2>Absensi Siswa</h2>
             </div>
             <nav class="sidebar-nav">
@@ -184,7 +184,7 @@ export function addFooter() {
             <div class="footer-social">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/yustdanus_?igsh=MmNkdjV4cGdubHBn"><i class="fab fa-instagram"></i></a>
             </div>
         </footer>
     `;
