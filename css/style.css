@@ -1,0 +1,804 @@
+/* css/style.css - Disesuaikan untuk tampilan profesional, responsif, dan elegan dengan tema biru */
+
+/* Import font Montserrat dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* Tema Warna Biru */
+    --primary-color: #007BFF; /* Biru Utama */
+    --primary-dark: #0056b3; /* Biru Lebih Gelap untuk hover/active */
+    --primary-light: #E0F2FF; /* Biru Sangat Terang untuk latar belakang */
+    --accent-color: #28a745; /* Hijau untuk aksen/sukses */
+    --danger-color: #dc3545; /* Merah untuk bahaya/error */
+    --info-color: #17a2b8; /* Cyan untuk info */
+
+    --text-color-dark: #343a40; /* Teks gelap */
+    --text-color-light: #f8f9fa; /* Teks terang */
+    --bg-light: #f0f2f5; /* Latar belakang body/container yang lebih modern */
+    --bg-card: #ffffff; /* Latar belakang card/container utama */
+    --bg-sidebar: #007BFF; /* Latar belakang sidebar (biru utama) */
+    --border-color: #ced4da; /* Warna border umum yang lebih halus */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
+    --shadow-heavy: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* Pastikan html dan body mengambil tinggi penuh viewport dan lebar penuh */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Explicitly set width to 100% */
+    min-width: 100%; /* Ensure it doesn't shrink below 100% */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif; /* Menggunakan font Montserrat */
+    background-color: var(--bg-light);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    display: flex; /* Menggunakan flexbox untuk layout utama */
+    flex-direction: column; /* Menumpuk konten secara vertikal: page-wrapper di atas, footer di bawah */
+    min-height: 100vh; /* Memastikan body setidaknya setinggi viewport */
+    overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+    font-size: 16px; /* Ukuran font default untuk desktop */
+}
+
+/* --- Layout Wrapper (untuk membagi sidebar dan konten utama) --- */
+.page-wrapper {
+    display: flex;
+    flex-grow: 1; /* Memastikan page-wrapper mengisi ruang vertikal yang tersedia */
+    width: 100%; /* Ambil lebar penuh */
+    flex-direction: column; /* Default untuk mobile: sidebar (fixed) dan main-content-area (di bawahnya) */
+}
+
+/* --- Sidebar (Navigasi Kiri) --- */
+.sidebar {
+    width: 250px; /* Lebar sidebar */
+    background: linear-gradient(to bottom, #007BFF, #0056b3); /* Gradient biru */
+    color: var(--text-color-light);
+    padding: 20px 0;
+    box-shadow: var(--shadow-heavy); /* Efek shadow yang lebih kuat */
+    position: fixed; /* Sidebar fixed di mobile */
+    height: 100%; /* Ambil tinggi penuh di mobile */
+    left: -250px; /* Sembunyikan sidebar secara default di mobile */
+    top: 0;
+    z-index: 1100; /* Lebih tinggi dari header */
+    transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Animasi lebih hidup */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active {
+    left: 0; /* Tampilkan sidebar */
+}
+
+.sidebar-header {
+    text-align: center;
+    padding: 15px 0 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+}
+
+.sidebar-header img {
+    width: 70px; /* Ukuran logo lebih besar */
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+    object-fit: cover;
+    border: 3px solid var(--accent-color); /* Border aksen yang lebih menonjol */
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.2); /* Efek glow ringan */
+}
+
+.sidebar-header h2 {
+    color: var(--text-color-light);
+    margin: 0;
+    font-size: 1.8em; /* Ukuran judul lebih besar */
+    font-weight: 700; /* Lebih tebal */
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500; /* Lebih tebal dari sebelumnya */
+    transition: background-color 0.3s ease, padding-left 0.3s ease, color 0.3s ease;
+    border-left: 5px solid transparent; /* Border default transparan */
+}
+
+.sidebar-nav li a i {
+    margin-right: 15px;
+    font-size: 1.2em;
+}
+
+.sidebar-nav li a:hover {
+    background-color: var(--primary-dark); /* Warna biru lebih gelap saat hover */
+    padding-left: 25px; /* Sedikit bergeser ke kanan */
+    border-left-color: var(--accent-color); /* Garis aksen hijau */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Efek shadow internal */
+}
+
+.sidebar-nav li a.active {
+    background-color: var(--primary-dark);
+    padding-left: 25px;
+    border-left-color: var(--accent-color);
+    font-weight: 700; /* Lebih tebal saat aktif */
+    color: var(--accent-color); /* Teks aktif berwarna aksen */
+}
+
+
+/* Overlay saat sidebar terbuka (untuk klik di luar) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Lebih gelap */
+    z-index: 1099;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Main Content Area (Konten utama yang beradaptasi) --- */
+.main-content-area {
+    flex-grow: 1; /* Memastikan konten utama mengisi sisa ruang horizontal di desktop */
+    width: 100%; /* Ambil lebar penuh yang tersedia */
+    display: flex;
+    flex-direction: column; /* Menumpuk header dan main-content-container secara vertikal */
+}
+
+/* Top Header (untuk hamburger menu dan judul aplikasi) */
+.top-header {
+    background: linear-gradient(to right, #007BFF, #0056b3); /* Gradient biru */
+    color: var(--text-color-light);
+    padding: 15px 20px;
+    box-shadow: var(--shadow-medium); /* Shadow untuk header */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    position: sticky; /* Sticky header untuk mobile */
+    top: 0;
+}
+
+.top-header .hamburger-menu {
+    display: flex; /* Selalu tampilkan di tampilan mobile */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    padding: 5px;
+    transition: transform 0.3s ease; /* Animasi klik */
+}
+.top-header .hamburger-menu:hover {
+    transform: scale(1.1);
+}
+
+.top-header .hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color-light);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Burger animation */
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.top-header .app-title {
+    font-size: 1.6em; /* Ukuran font default untuk desktop, akan disesuaikan di mobile */
+    font-weight: 700;
+    flex-grow: 1;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    white-space: nowrap; /* Mencegah teks pecah baris */
+    overflow: hidden; /* Sembunyikan overflow */
+    text-overflow: ellipsis; /* Tambahkan elipsis jika teks terlalu panjang */
+}
+.top-header .dummy-space {
+    width: 35px; /* Untuk menyeimbangkan hamburger menu di kiri */
+}
+
+
+.main-content-container {
+    padding: 25px 20px;
+    flex-grow: 1; /* Memastikan konten utama mengisi sisa ruang vertikal */
+    display: flex; /* Menggunakan flexbox untuk konten utama */
+    flex-direction: column; /* Konten di dalamnya menumpuk secara vertikal */
+    align-items: center; /* Pusatkan konten horizontal */
+}
+
+.container {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 12px; /* Sudut lebih membulat */
+    box-shadow: var(--shadow-medium); /* Shadow yang lebih menonjol */
+    width: 100%; /* Ambil lebar penuh dari main-content-container */
+    max-width: 900px; /* Batasi lebar maksimal untuk estetika */
+    margin: 0 auto; /* Pusatkan container */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animasi hover */
+}
+.container:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-heavy);
+}
+
+
+h1, h2, h3 {
+    color: var(--primary-dark); /* Warna judul lebih gelap dari primary */
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700; /* Lebih tebal */
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.05);
+}
+h1 { font-size: 2.5em; } /* Ukuran H1 lebih besar di desktop */
+h2 { font-size: 1.8em; }
+h3 { font-size: 1.4em; }
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600; /* Label lebih tebal */
+    color: var(--text-color-dark);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="month"],
+select {
+    width: calc(100% - 22px);
+    padding: 12px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Sudut input lebih membulat */
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fcfcfc; /* Latar belakang input sedikit lebih terang */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="month"]:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); /* Efek glow biru */
+    outline: none;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px; /* Sudut tombol lebih membulat */
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600; /* Tombol lebih tebal */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Shadow lebih kuat */
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px); /* Efek angkat */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Shadow lebih besar saat hover */
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-info {
+    background-color: var(--info-color);
+}
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.error-message {
+    color: var(--danger-color);
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    animation: fadeIn 0.5s ease-out; /* Animasi muncul */
+}
+
+.success-message {
+    color: var(--accent-color);
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    animation: fadeIn 0.5s ease-out; /* Animasi muncul */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Tabel Umum --- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    background-color: var(--bg-card);
+    border-radius: 10px; /* Sudut tabel membulat */
+    overflow: hidden; /* Penting untuk border-radius di tabel */
+    box-shadow: var(--shadow-light);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    min-width: 80px; /* Default min-width, akan di-override spesifik */
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    font-weight: 700; /* Header tabel lebih tebal */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+th:first-child { border-top-left-radius: 10px; }
+th:last-child { border-top-right-radius: 10px; }
+
+tr:nth-child(even) {
+    background-color: #f8f9fa; /* Warna striping yang lebih terang */
+}
+
+tr:hover {
+    background-color: var(--primary-light);
+    transition: background-color 0.2s ease;
+}
+
+/* --- Styling Khusus untuk Tabel di Halaman Manage Data --- */
+#student-list-table th:first-child,
+#student-list-table td:first-child {
+    width: 50px; /* Lebar tetap untuk kolom nomor */
+    min-width: 50px;
+    max-width: 50px;
+    text-align: center; /* Pusatkan nomor */
+}
+
+#student-list-table th:nth-child(2), /* Nama Siswa */
+#student-list-table td:nth-child(2) {
+    min-width: 180px; /* Beri ruang lebih untuk nama siswa */
+}
+
+#student-list-table th:nth-child(3), /* NISN */
+#student-list-table td:nth-child(3) {
+    min-width: 120px; /* Beri ruang lebih untuk NISN */
+}
+
+#student-list-table th:nth-child(4), /* Kelas */
+#student-list-table td:nth-child(4) {
+    width: 100px; /* Lebar yang lebih fit untuk kolom kelas */
+    min-width: 100px;
+    max-width: 100px;
+}
+
+#student-list-table .action-buttons {
+    display: flex;
+    flex-wrap: nowrap; /* Pastikan tombol tidak wrap */
+    gap: 5px; /* Jarak antar ikon */
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 90px; /* Cukup untuk 2 ikon kecil */
+}
+
+#student-list-table .action-buttons button {
+    margin-right: 0;
+    padding: 6px 8px; /* Padding tombol aksi untuk ikon */
+    font-size: 0.9em; /* Ukuran font ikon */
+    flex-shrink: 0; /* Jangan menyusut */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: auto; /* Biarkan lebar menyesuaikan ikon */
+    height: auto;
+    display: flex; /* Untuk memusatkan ikon */
+    justify-content: center;
+    align-items: center;
+}
+#student-list-table .action-buttons button:hover {
+    transform: translateY(-1px); /* Efek angkat lebih kecil */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* --- Styling Khusus untuk Tabel di Halaman Kehadiran (Presence) --- */
+#presence-table th:first-child,
+#presence-table td:first-child {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    text-align: center;
+}
+
+#presence-table th:nth-child(2), /* Nama Siswa */
+#presence-table td:nth-child(2) {
+    min-width: 200px; /* Cukup lebar untuk nama siswa */
+}
+
+#presence-table th:nth-child(3), /* Kelas */
+#presence-table td:nth-child(3) {
+    width: 120px; /* Lebar yang lebih pas untuk kelas */
+    min-width: 120px;
+    max-width: 120px;
+}
+
+#presence-table th:nth-child(4), /* Kehadiran */
+#presence-table td:nth-child(4) {
+    min-width: 300px; /* Cukup lebar untuk semua opsi kehadiran */
+}
+
+#presence-table .presence-options {
+    display: flex;
+    flex-wrap: nowrap; /* Mencegah opsi radio button pecah baris */
+    gap: 8px; /* Jarak antar grup radio button */
+    align-items: center;
+}
+
+#presence-table .presence-options input[type="radio"] {
+    margin-right: 8px; /* Jarak antara radio button dan label */
+    transform: scale(1.1); /* Sedikit lebih besar agar mudah disentuh */
+}
+
+#presence-table .presence-options label {
+    margin-right: 0; /* Hapus margin tambahan */
+    white-space: nowrap; /* Pastikan label tetap dalam satu baris */
+    font-size: 0.9em; /* Ukuran font sedikit lebih kecil agar lebih ringkas */
+}
+
+
+/* Specific for Recap Page */
+.recap-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+}
+.recap-controls .form-group {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 180px;
+}
+.recap-controls button {
+    min-width: 120px;
+}
+
+/* Container untuk tabel agar bisa di-scroll horizontal di mobile */
+/* Ini sangat penting untuk memastikan scroll horizontal berfungsi */
+#student-list-table-container,
+#presence-table-container,
+#recap-table-container {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow-x: auto; /* Memungkinkan scroll horizontal */
+    -webkit-overflow-scrolling: touch; /* Untuk smooth scrolling di iOS */
+}
+
+/* --- Loading Overlay --- */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Lebih opaque */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.spinner {
+    border: 6px solid rgba(0, 123, 255, 0.2); /* Warna spinner sesuai tema */
+    border-left-color: var(--primary-color);
+    border-radius: 50%;
+    width: 50px; /* Ukuran spinner lebih besar */
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Footer --- */
+.footer {
+    background-color: var(--primary-dark); /* Footer menggunakan warna biru gelap */
+    color: var(--text-color-light);
+    text-align: center;
+    padding: 25px 0; /* Vertical padding */
+    margin-top: auto; /* Push footer to the bottom */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    width: 100%; /* Take full width of its parent (body) */
+    box-sizing: border-box; /* Include padding in width calculation */
+    font-size: 0.95em;
+}
+
+/* Add horizontal padding to the content inside the footer to prevent it from touching edges */
+/* This ensures content is centered and not full width, while background is full width */
+.footer p, .footer-social {
+    padding: 0 20px; /* Add 20px horizontal padding to content */
+    box-sizing: border-box;
+    max-width: 900px; /* Limit content width for readability, similar to .container */
+    margin-left: auto; /* Center the content */
+    margin-right: auto;
+}
+
+.footer-social {
+    margin-top: 15px;
+}
+
+.footer-social a {
+    color: var(--text-color-light);
+    margin: 0 12px;
+    font-size: 1.6em; /* Ukuran ikon sosial lebih besar */
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+.footer-social a:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px) scale(1.1); /* Efek angkat dan sedikit membesar */
+}
+
+/* --- Responsiveness (Desktop View) --- */
+@media (min-width: 769px) {
+    /* Di desktop, body tetap flex-direction: column untuk menumpuk page-wrapper dan footer */
+    /* page-wrapper akan menjadi flex-row untuk sidebar dan main-content-area */
+    .page-wrapper {
+        flex-direction: row; /* Sidebar dan konten utama berdampingan */
+        max-width: none; /* Hapus batasan lebar maksimal jika ada */
+    }
+
+    .sidebar {
+        position: relative; /* Sidebar menjadi bagian dari aliran dokumen */
+        left: 0; /* Pastikan terlihat */
+        min-width: 250px; /* Lebar tetap untuk sidebar */
+        height: auto; /* Tinggi menyesuaikan konten */
+        box-shadow: none; /* Hapus shadow yang mungkin mengganggu di desktop */
+        padding-top: 50px; /* Sesuaikan padding agar tidak terlalu mepet header */
+        flex-shrink: 0; /* Jangan menyusut */
+    }
+
+    .main-content-area {
+        margin-left: 0; /* Tidak ada margin tambahan */
+        flex-grow: 1; /* Pastikan ini mengisi semua ruang horizontal yang tersisa */
+        width: auto; /* Biarkan flex-grow menentukan lebar */
+    }
+
+    .top-header {
+        position: relative; /* Header tidak sticky di desktop */
+        background: var(--primary-color); /* Bisa gradient atau solid */
+        box-shadow: var(--shadow-medium);
+    }
+    .top-header .hamburger-menu {
+        display: none; /* Sembunyikan hamburger di desktop */
+    }
+    .top-header .app-title {
+        text-align: left; /* Geser judul ke kiri */
+        margin-left: 20px;
+    }
+     .top-header .dummy-space {
+        display: none;
+    }
+    .overlay {
+        display: none !important; /* Pastikan overlay tidak muncul */
+    }
+
+    /* Pastikan container di dalam main-content-container tetap di tengah dan tidak menyusut */
+    .main-content-container {
+        align-items: center; /* Tetap pusatkan konten */
+        padding-top: 25px; /* Sesuaikan padding atas jika perlu, agar tidak terlalu mepet header */
+    }
+    .container {
+        width: 100%; /* Ambil lebar penuh dari main-content-container */
+        max-width: 900px; /* Batasi lebar maksimal untuk estetika */
+    }
+
+    body {
+        font-size: 16px; /* Ukuran font default untuk desktop */
+    }
+
+    /* Ensure footer is full width on desktop */
+    .footer {
+        width: 100%; /* Take full width of its parent (body) */
+        max-width: none; /* Override any potential max-width */
+        padding: 25px 0; /* Maintain vertical padding */
+    }
+    /* Ensure footer content is padded and centered on desktop */
+    .footer p, .footer-social {
+        padding: 0 20px; /* Add horizontal padding to content */
+        max-width: 900px; /* Limit content width for readability */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* --- Responsiveness (Mobile View) --- */
+@media (max-width: 768px) {
+    /* Body dan page-wrapper sudah flex-direction: column secara default */
+
+    body {
+        font-size: 14px; /* Ukuran font lebih kecil di mobile */
+    }
+
+    .sidebar {
+        /* Tetap position: fixed, left: -250px, tapi full height */
+    }
+
+    .main-content-area {
+        width: 100%; /* Ambil lebar penuh */
+        /* padding-top tidak lagi diperlukan di sini karena top-header sudah sticky */
+    }
+
+    .top-header {
+        position: sticky; /* Header sticky di mobile */
+        top: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .top-header .app-title {
+        font-size: 1.2em; /* Font judul header lebih kecil di mobile */
+        text-align: center; /* Tetap di tengah */
+        white-space: nowrap; /* Mencegah teks pecah baris */
+        overflow: hidden; /* Sembunyikan overflow */
+        text-overflow: ellipsis; /* Tambahkan elipsis jika teks terlalu panjang */
+    }
+
+
+    .main-content-container {
+        padding: 15px 10px; /* Padding lebih kecil di mobile */
+    }
+
+    .container {
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: 8px; /* Sudut lebih kecil di mobile */
+    }
+
+    h1 { font-size: 2em; } /* Ukuran H1 disesuaikan */
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.2em; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="month"],
+    select {
+        padding: 10px; /* Padding input lebih kecil */
+        font-size: 0.9em;
+    }
+
+    button {
+        width: 100%; /* Tombol mengambil lebar penuh di mobile */
+        margin-bottom: 10px;
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .recap-controls {
+        flex-direction: column; /* Kontrol rekap menumpuk di mobile */
+        align-items: stretch;
+        padding: 15px;
+    }
+    .recap-controls .form-group, .recap-controls button {
+        width: 100%;
+        min-width: auto;
+    }
+
+    /* Tabel di mobile: Tetap horizontal dengan scroll */
+    table {
+        width: 100%;
+    }
+
+    thead tr {
+        position: relative;
+    }
+
+    td:before {
+        content: none; /* Hapus label data untuk tampilan horizontal */
+    }
+
+    th, td {
+        padding: 10px; /* Padding sel tabel lebih kecil di mobile */
+        white-space: nowrap; /* Mencegah teks pecah baris di sel tabel */
+    }
+
+    #student-list-table-container,
+    #presence-table-container,
+    #recap-table-container {
+        overflow-x: auto; /* Memungkinkan scroll horizontal */
+    }
+
+    .presence-options label {
+        display: inline-flex;
+        margin-right: 10px; /* Jarak radio button lebih kecil */
+        font-size: 0.9em;
+    }
+
+    .footer {
+        padding: 15px 0;
+        font-size: 0.8em; /* Ukuran font footer lebih kecil */
+    }
+    .footer-social a {
+        font-size: 1.3em; /* Ukuran ikon sosial lebih kecil */
+        margin: 0 8px;
+    }
+}
